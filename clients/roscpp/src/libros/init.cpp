@@ -471,7 +471,7 @@ void init(const M_string& remappings, const std::string& name, uint32_t options)
 
     g_initialized = true;
 
-    ros::trace::node_init(name.c_str(), ROS_VERSION);
+    ros::trace::node_init(this_node::getName().c_str(), ROS_VERSION);
   }
 }
 
