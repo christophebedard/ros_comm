@@ -743,7 +743,7 @@ void TopicManager::publish(const std::string& topic, const boost::function<Seria
       m.message_start = m2.message_start;
     }
 
-    ros::trace::publisher_message_queued(topic, m.message_start);
+    ros::trace::publisher_message_queued(topic, m.message_start, (!p->hasSubscribers() && p->isLatching()));
     p->publish(m);
 
     // If we're not doing a serialized publish we don't need to signal the pollset.  The write()
