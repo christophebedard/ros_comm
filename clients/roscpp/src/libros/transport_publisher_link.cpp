@@ -261,6 +261,11 @@ void TransportPublisherLink::onConnectionDropped(const ConnectionPtr& conn, Conn
 
   SubscriptionPtr parent = parent_.lock();
 
+  ros::trace::connection_dropped(
+      connection_->getTransport()->getAddress(true).c_str(),
+      connection_->getTransport()->getAddress(false).c_str(), connection_.get(),
+      "TransportPublisherLink", parent->getName().c_str(), parent->datatype().c_str());
+
   if (reason == Connection::TransportDisconnect)
   {
     std::string topic = parent ? parent->getName() : "unknown";
