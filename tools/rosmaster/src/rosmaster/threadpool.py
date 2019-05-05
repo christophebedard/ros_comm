@@ -55,7 +55,6 @@ class MarkedThreadPool(object):
     def __init__(self, numThreads):
 
         """Initialize the thread pool with numThreads workers."""
-        
         self.__threads = []
         self.__resizeLock = threading.Condition(threading.Lock())
         self.__taskLock = threading.Condition(threading.Lock())
@@ -87,8 +86,12 @@ class MarkedThreadPool(object):
         if necessary.  Internal use only; assumes the resizing lock is
         held."""
         
+        # file_name = r'/proc/lttng-logger'
+        # f = open(file_name, 'w')
         # If we need to grow the pool, do so
         while newNumThreads > len(self.__threads):
+            # f.write('new thread out of ' + str(newNumThreads))
+            # f.flush()
             newThread = ThreadPoolThread(self)
             self.__threads.append(newThread)
             newThread.start()
